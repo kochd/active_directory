@@ -79,6 +79,14 @@ module ActiveDirectory
 			@groups ||= Group.find(:all, :distinguishedname => @entry[:memberOf] )
 		end
 
+                #
+                # Returns true if User object is member of Group object.
+                # group is a dn of a group
+                #
+                def memberof?
+                  self["memberof"].map(&:dn).include?(group)
+                end
+
 		#
 		# Returns an array of User objects that have this
 		# User as their manager.
